@@ -1,0 +1,14 @@
+body {
+	background-color: black;
+	color: white;
+}
+
+#buttons {
+	display: flex;
+	padding: 20px;
+	border: 1px solid white;
+
+	* {
+		background-color: black;
+	}
+}
