@@ -55,3 +55,14 @@ Return
 	}
 
 Return
+
+F2::
+	IfWinActive, ahk_exe vlc.exe
+	{
+		WinMinimize, ahk_exe vlc.exe
+	}
+	else
+	{
+		WinActivate, ahk_exe vlc.exe
+	}
+Return
