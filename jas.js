@@ -20,7 +20,14 @@ function change_selection_type(trigger_type)
 		selection_af  = $('<DIV/>', {class: 'selection_af'}).appendTo(selection_row);
 
 		// so depends on the trigger_type, we will have the equivalent b4 and af
+
+		switch(trigger_type)
+		{
+			
+		}
+
 		// btw think about how to quickly replace content (maybe better than what we've got)
+		// just select multiple elements and batch then to replace content
 	}
 function find_stuffs_near_me(which_type)
 	{
