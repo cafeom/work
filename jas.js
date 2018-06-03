@@ -57,3 +57,15 @@ function find_stuffs_near_me(which_type)
 
 		return found_stuffs;
 	}
+
+function change_selection_row(direction)
+	{
+		if ( direction == 'up' )
+		{
+			
+		}
+		else
+		{
+			
+		}
+	}
