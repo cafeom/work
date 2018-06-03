@@ -2,20 +2,56 @@
 	Reload
 Return
 
+!A::
+	WinGet, curtrans, Transparent, A
+	if (curtrans != 0)
+	{
+	    WinSet, Transparent, 0, A
+	    WinSet, AlwaysOnTop, on, A
+	    WinSet, ExStyle, +0x80020, A	
+	}
+	else
+	{
+		WinSet, Transparent, OFF, A
+		WinSet, Transparent, 255, A
+		Winset, AlwaysOnTop, off, A
+		WinSet, ExStyle, -0x80020, A
+	}
+	
+Return
+
 !D::
 	WinGet, curtrans, Transparent, A
-	WinGet, currentWindow, ID, A
-	    if curtrans > 200
-	    {
-	        WinSet, Transparent, 150, A
-	        WinSet, AlwaysOnTop, on, ahk_id %currentWindow%
-	        WinSet, ExStyle, +0x80020, ahk_id %currentWindow%
-	    }
-	    else
-	    {
-	        WinSet, Transparent, OFF, A
-	        WinSet, Transparent, 255, A
-	        Winset, AlwaysOnTop, off, ahk_id %currentWindow%
-	        WinSet, ExStyle, -0x80020, ahk_id %currentWindow%
-	    }
+	if (curtrans != 45)
+	{
+	    WinSet, Transparent, 45, A
+	    WinSet, AlwaysOnTop, on, A
+	    WinSet, ExStyle, +0x80020, A	
+	}
+	else
+	{
+		WinSet, Transparent, OFF, A
+		WinSet, Transparent, 255, A
+		Winset, AlwaysOnTop, off, A
+		WinSet, ExStyle, -0x80020, A
+	}
+
+Return
+
+!F::
+	WinGet, curtrans, Transparent, A
+	if (curtrans != 55)
+	{
+	    WinSet, Transparent, 55, A
+	    WinSet, AlwaysOnTop, on, A
+	    WinSet, ExStyle, +0x80020, A	
+	}
+	else
+	{
+		WinSet, Transparent, OFF, A
+		WinSet, Transparent, 255, A
+		Winset, AlwaysOnTop, off, A
+		WinSet, ExStyle, -0x80020, A
+	}
+
 Return
