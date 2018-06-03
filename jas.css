@@ -19,7 +19,15 @@ body {
 #mini {
   width: 300px;
   height: 300px;
-  border: 1px solid rgba(255, 255, 255, 0.2); }
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: scroll; }
+  #mini::-webkit-scrollbar {
+    width: 5px;
+    height: 0; }
+  #mini::-webkit-scrollbar-track {
+    background: transparent; }
+  #mini::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5); }
 
 #buttons {
   display: -webkit-box;
