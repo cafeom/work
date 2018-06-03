@@ -69,3 +69,6 @@ function change_selection_row(direction)
 			
 		}
 	}
+
+// https://javfinder.is/movie/watch/fhd-s1no-1style-ssni-219-adult-video-i-caught-a-reason-by-the-oil-massage-after-i-repeatedly-punctuated-the-shape-stop-kojima-minami.html
+// https://www.youtube.com/watch?v=iULSAN3O8IY
