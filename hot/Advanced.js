@@ -169,9 +169,11 @@ function update_changer_panel()
 			{
 				if ( current_propeties[j] != 'rgba(0, 0, 0, 0)' )
 				{
-					changer_row = $('<DIV/>', {type: my_propeties_root[i], cix: current_propeties[j], class: 'changer_row'}).appendTo('#changer');
-					changer_b4  = $('<DIV/>', {type: my_propeties_root[i], cix: current_propeties[j], class: 'changer_b4'}).appendTo(changer_row);
-					changer_aft = $('<DIV/>', {type: my_propeties_root[i], cix: current_propeties[j], class: 'changer_aft'}).appendTo(changer_row);
+					changer_row = $('<DIV/>', {cix: current_propeties[j], class: 'changer_row'}).appendTo('#changer');
+					changer_b4  = $('<DIV/>', {cix: current_propeties[j], class: 'changer_b4'}).appendTo(changer_row);
+					changer_aft = $('<DIV/>', {cix: current_propeties[j], class: 'changer_aft'}).appendTo(changer_row);
+
+					$(changer_row).add(changer_row.children()).attr({ val : 'default', fn : my_propeties_root[i] });
 
 					if ( my_propeties_root[i].indexOf('color') >= 0 )
 					{
@@ -185,9 +187,25 @@ function update_changer_panel()
 			}
 		}
 
+		// .changer_aft elements are draggale
+
+		$('.line-stat').draggable({
+			start : function(e, ui)
+			{
+				if ( $(this).attr('val') == 'default' ) { my_original = 1; } else { my_original = parseInt($(this).attr('val')); }
+
+				my_fn = $(this).attr('fn');
+			},
+			drag : function(e, ui)
+			{
+				my_equation = ui.position.left - ui.originalPosition.left;
+
+				
+			}})
+
 		$('.changer_aft').click(function(e)
-		{
-			my_arc = my_propeties_ids[$(this).attr('type')][$(this).attr('cix')];
+		{ console.log($(this).attr('fn')); console.log( my_propeties_ids[$(this).attr('fn')] );
+			my_arc = my_propeties_ids[$(this).attr('fn')][$(this).attr('cix')];
 
 			for (var i = 0; i < my_arc.length; i++)
 			{
