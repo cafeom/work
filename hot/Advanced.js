@@ -102,11 +102,38 @@ function update_changer_panel()
 
 			$(my_sweets).each(function(index, value) {
 
-				my_current_propety = value.doc.css(my_propeties_root[i]);
-								
-				if ( inside(my_current_propety, my_propeties[my_propeties_root[i]]) == false )
+				if ( my_propeties_root[i] == 'border-color' )
 				{
-					my_propeties[my_propeties_root[i]].push(my_current_propety);
+					if ( value.doc.css('border').indexOf('none') < 0 )
+					{
+						my_current_propety = value.doc.css(my_propeties_root[i]);
+										
+						if ( inside(my_current_propety, my_propeties[my_propeties_root[i]]) == false )
+						{
+							my_propeties[my_propeties_root[i]].push(my_current_propety);
+						}
+					}
+				}
+				else if ( (my_propeties_root[i] == 'font-size' || my_propeties_root[i] == 'font-family') && value.tag != 'H3' )
+				{
+					if ( value.doc.text() != '' )
+					{
+						my_current_propety = value.doc.css(my_propeties_root[i]);
+
+						if ( inside(my_current_propety, my_propeties[my_propeties_root[i]]) == false )
+						{
+							my_propeties[my_propeties_root[i]].push(my_current_propety);
+						}
+					}
+				}
+				else
+				{
+					my_current_propety = value.doc.css(my_propeties_root[i]);
+									
+					if ( inside(my_current_propety, my_propeties[my_propeties_root[i]]) == false )
+					{
+						my_propeties[my_propeties_root[i]].push(my_current_propety);
+					}
 				}
 
 			})
@@ -118,19 +145,22 @@ function update_changer_panel()
 		{
 			current_propeties = my_propeties[my_propeties_root[i]];
 
-			changer_row = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_row'}).appendTo('#changer');
-			changer_b4  = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_b4'}).appendTo(changer_row);
-			changer_aft = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_aft'}).appendTo(changer_row);
-
 			for (var j = 0; j < current_propeties.length; j++)
 			{
-				if ( my_propeties_root[i].indexOf('color') >= 0 )
+				if ( current_propeties[j] != 'rgba(0, 0, 0, 0)' )
 				{
-					changer_b4.add(changer_aft).css('background-color', current_propeties[j]).addClass('changer_color');
-				}
-				else
-				{
-					changer_b4.add(changer_aft).text(current_propeties[j]).addClass('changer_text');;
+					changer_row = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_row'}).appendTo('#changer');
+					changer_b4  = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_b4'}).appendTo(changer_row);
+					changer_aft = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_aft'}).appendTo(changer_row);
+
+					if ( my_propeties_root[i].indexOf('color') >= 0 )
+					{
+						changer_b4.add(changer_aft).css('background-color', current_propeties[j]).addClass('changer_color');
+					}
+					else
+					{
+						changer_b4.add(changer_aft).text(current_propeties[j]).addClass('changer_text');;
+					}
 				}
 			}
 		}
