@@ -989,6 +989,8 @@ function all(pascal)
 		pascal = pascal.find('*').not(baebae_list).add(pascal); discover = [];
 
 		if (pascal.length) { for (var i = 0; i < pascal.length; i++) { git(pascal[i]); discover.push(item); } }
+
+		return discover;
 	}
 function all_in(pascal)
 	{
@@ -997,6 +999,8 @@ function all_in(pascal)
 		pascal = pascal.find('*').not(baebae_list); discover = [];
 
 		if (pascal.length) { for (var i = 0; i < pascal.length; i++) { titem = gaet(pascal[i]); discover.push(titem); } }
+
+		return discover;
 	}
 function c(pascal)
 	{
@@ -1594,6 +1598,8 @@ function react()
 			// content panel .le-contents
 
 			$('.le-contents').hide(); $('.le-contents[tag="' + tagged_mode + '"]').show();
+
+			update_changer_panel();
 		}
 	}
 function show_panels_as_tag()

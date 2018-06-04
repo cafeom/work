@@ -2074,7 +2074,10 @@ SP {
     align-items: center;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; }
+    justify-content: center;
+    margin: 5px; }
+    #changer .changer_row .changer_b4 {
+      margin-right: 100px; }
     #changer .changer_row .changer_color {
       width: 50px;
       height: 50px; }

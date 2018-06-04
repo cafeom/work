@@ -75,7 +75,7 @@ function color_keys_load()
 
 function update_changer_panel()
 	{
-		$('#changer').remove();
+		$('#changer').empty();
 
 		my_propeties = {}; my_propeties_root = 'color background-color border-color font-size font-family'.split(' ');
 
@@ -84,8 +84,8 @@ function update_changer_panel()
 		my_sweets = [];
 
 		$(selection).each(function(index, value) {
-							
-			arr = all(selection[i].id);
+
+			arr = all(value.id);
 
 			for (var i = 0; i < arr.length; i++)
 			{
@@ -93,8 +93,6 @@ function update_changer_panel()
 			}
 				
 		})
-
-		console.log(my_sweets);
 
 		// we need to search through all elements and get all the unique propeties
 
@@ -104,7 +102,7 @@ function update_changer_panel()
 
 			$(my_sweets).each(function(index, value) {
 
-				my_current_propety = my_sweets[i].doc.css(my_propeties_root[i]);
+				my_current_propety = value.doc.css(my_propeties_root[i]);
 								
 				if ( inside(my_current_propety, my_propeties[my_propeties_root[i]]) == false )
 				{
@@ -128,11 +126,11 @@ function update_changer_panel()
 			{
 				if ( my_propeties_root[i].indexOf('color') >= 0 )
 				{
-					changer_b4.add(changer_aft).css('background-color', current_propeties[i]).addClass('changer_color');
+					changer_b4.add(changer_aft).css('background-color', current_propeties[j]).addClass('changer_color');
 				}
 				else
 				{
-					changer_b4.add(changer_aft).text(current_propeties[i]).addClass('changer_text');;
+					changer_b4.add(changer_aft).text(current_propeties[j]).addClass('changer_text');;
 				}
 			}
 		}
