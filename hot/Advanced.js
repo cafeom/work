@@ -77,11 +77,11 @@ function update_changer_panel()
 	{
 		$('#changer').empty();
 
-		my_propeties = {}; my_propeties_root = 'color background-color border-color font-size font-family'.split(' ');
+		my_propeties_root = 'color background-color border-color font-size font-family'.split(' ');
 
 		// we need to get all elements inside our div selections
 
-		my_sweets = [];
+		my_sweets = []; my_propeties = {}; my_propeties_ids = [];
 
 		$(selection).each(function(index, value) {
 
@@ -98,7 +98,7 @@ function update_changer_panel()
 
 		for (var i = 0; i < my_propeties_root.length; i++)
 		{
-			my_propeties[my_propeties_root[i]] = [];
+			my_propeties[my_propeties_root[i]] = []; my_propeties_ids[my_propeties_root[i]] = {}; my_current_propety = null;
 
 			$(my_sweets).each(function(index, value) {
 
@@ -111,6 +111,7 @@ function update_changer_panel()
 						if ( inside(my_current_propety, my_propeties[my_propeties_root[i]]) == false )
 						{
 							my_propeties[my_propeties_root[i]].push(my_current_propety);
+							my_propeties_ids[my_propeties_root[i]][my_current_propety] = [];
 						}
 					}
 				}
@@ -133,6 +134,7 @@ function update_changer_panel()
 						if ( inside(my_current_propety, my_propeties[my_propeties_root[i]]) == false )
 						{
 							my_propeties[my_propeties_root[i]].push(my_current_propety);
+							my_propeties_ids[my_propeties_root[i]][my_current_propety] = [];
 						}
 					}
 				}
@@ -143,7 +145,15 @@ function update_changer_panel()
 					if ( inside(my_current_propety, my_propeties[my_propeties_root[i]]) == false )
 					{
 						my_propeties[my_propeties_root[i]].push(my_current_propety);
+						my_propeties_ids[my_propeties_root[i]][my_current_propety] = [];
 					}
+				}
+
+				// register id if has so
+
+				if ( my_current_propety != null )
+				{
+					my_propeties_ids[my_propeties_root[i]][my_current_propety].push(value.id);
 				}
 
 			})
@@ -159,9 +169,9 @@ function update_changer_panel()
 			{
 				if ( current_propeties[j] != 'rgba(0, 0, 0, 0)' )
 				{
-					changer_row = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_row'}).appendTo('#changer');
-					changer_b4  = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_b4'}).appendTo(changer_row);
-					changer_aft = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_aft'}).appendTo(changer_row);
+					changer_row = $('<DIV/>', {type: my_propeties_root[i], cix: current_propeties[j], class: 'changer_row'}).appendTo('#changer');
+					changer_b4  = $('<DIV/>', {type: my_propeties_root[i], cix: current_propeties[j], class: 'changer_b4'}).appendTo(changer_row);
+					changer_aft = $('<DIV/>', {type: my_propeties_root[i], cix: current_propeties[j], class: 'changer_aft'}).appendTo(changer_row);
 
 					if ( my_propeties_root[i].indexOf('color') >= 0 )
 					{
@@ -174,6 +184,16 @@ function update_changer_panel()
 				}
 			}
 		}
+
+		$('.changer_aft').click(function(e)
+		{
+			my_arc = my_propeties_ids[$(this).attr('type')][$(this).attr('cix')];
+
+			for (var i = 0; i < my_arc.length; i++)
+			{
+				console.log( geet(my_arc[i]) );
+			}
+		})
 	}
 
 //////////////////////////////////////////////// Content Panel Functions /////////////////////////////////////////////////
