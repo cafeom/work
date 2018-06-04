@@ -116,7 +116,17 @@ function update_changer_panel()
 				}
 				else if ( (my_propeties_root[i] == 'font-size' || my_propeties_root[i] == 'font-family') && value.tag != 'H3' )
 				{
-					if ( value.doc.text() != '' )
+					childNodes = value.doc[0].childNodes; my_check = false;
+
+					for (var z = 0; z < childNodes.length; z++)
+					{
+						if ( childNodes[z].nodeName == '#text' )
+						{
+							my_check = true; break;
+						}
+					}
+
+					if ( my_check == true )
 					{
 						my_current_propety = value.doc.css(my_propeties_root[i]);
 
