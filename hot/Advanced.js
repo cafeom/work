@@ -192,7 +192,7 @@ function update_changer_panel()
 		$('.line-stat').draggable({
 			start : function(e, ui)
 			{
-				if ( $(this).attr('val') == 'default' ) { my_original = 1; } else { my_original = parseInt($(this).attr('val')); }
+				if ( $(this).attr('val') == 'default' ) { my_original = -1; } else { my_original = parseInt($(this).attr('val')); }
 
 				my_fn = $(this).attr('fn');
 			},
@@ -200,11 +200,18 @@ function update_changer_panel()
 			{
 				my_equation = ui.position.left - ui.originalPosition.left;
 
-				
+				if ( e.ctrlKey == false && e.shiftKey == false )
+				{
+					my_equation /= 10;
+				}
+
+				my_val = my_original + my_equation;
+
+				// at this point we need a color array and a font-family array to change to
 			}})
 
 		$('.changer_aft').click(function(e)
-		{ console.log($(this).attr('fn')); console.log( my_propeties_ids[$(this).attr('fn')] );
+		{
 			my_arc = my_propeties_ids[$(this).attr('fn')][$(this).attr('cix')];
 
 			for (var i = 0; i < my_arc.length; i++)
