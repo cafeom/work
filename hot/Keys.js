@@ -215,6 +215,9 @@ panel_down = {
 	},
 	'LP' : {
 
+		'R'       : [toggle_panel,'#le-browser'],
+		'T'       : [toggle_panel,'#content-panel'],
+
 		'Enter'   : [toggle_black],
 		'Slash'   : [mytest],
 
