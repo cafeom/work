@@ -1,0 +1,32 @@
+{
+	"name": "Ambition",
+	"manifest_version": 2,
+	"version": "2.0",
+	"permissions": [ "storage", "tabs", "contextMenus"],
+	"background":{
+		"scripts": ["plug/background.js"],
+		"persistent": false
+	},
+	"content_scripts": [ {
+    "js"  : [ 	"script/jquery.min.js",
+    			"script/jquery-ui.min.js",
+                "script/jquery.mousewheel.js",
+                "script/snap.js",
+                "script/html2canvas.js",
+    			"script/lorem.js",
+                "script/gallery.js",
+                "script/fittext.js",
+                "script/spectrum.js",
+
+                "plug/joined.js",
+                "plug/document.js",
+                "plug/controller.js",
+
+                "Icons.js",
+                "Advanced.js",
+                "Main.js",
+                "Keys.js" ],
+    "css" : [ "plug/controller.css", "script/jquery-ui.min.css", "script/spectrum.css" ],
+    "matches": [ "http://*/*", "https://*/*"]
+  }]
+}

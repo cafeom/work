@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<head>
+  <title>Main</title>
+  <script src="script/jquery.min.js"></script>
+  <script src="script/jquery-ui.min.js"></script>
+
+  <script src="script/lorem.js"></script>
+  <script src="script/gallery.js"></script>
+  <script src="script/rangeslider.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <link rel="stylesheet" href="script/jquery-ui.min.css">
+  <link rel="stylesheet" href="script/rangeslider.css">
+  <link rel="stylesheet" href="script/gallery.css">
+  <link rel="stylesheet" href="Main.css">
+</head>
+<body class="black" spellcheck="false">
+
+  <div id="doc"></div>
+  <panel id="LP">
+    <div id="LP_Inside"></div>
+  </panel>
+
+  <div id="booms"></div>
+  <div id="wires"></div>
+  
+  <panel id="format-panel" class="hide">
+    <div id="orientation-line">
+      <div class="orientation-option">col</div>
+      <div class="orientation-option">row</div>
+      <div class="orientation-option">grid</div>
+    </div>
+    <div class="format-list" orientation="col">
+      <div class="format" orientation="col" fn="col left center">col left center</div>
+      <div class="format" orientation="col" fn="col left top">col left top</div>
+      <div class="format" orientation="col" fn="col center center">col center center</div>
+      <div class="format" orientation="col" fn="col center top">col center top</div>
+      <div class="format" orientation="col" fn="col right center">col right center</div>
+      <div class="format" orientation="col" fn="col right top">col right top</div>
+    </div>
+    <div class="format-list" orientation="row">
+      <div class="format" orientation="row">row center center</div>
+      <div class="format" orientation="row">row center bottom</div>
+      <div class="format" orientation="row">row center baseline</div>
+      <div class="format" orientation="row">row SB center</div>
+      <div class="format" orientation="row">row SB bottom</div>
+      <div class="format" orientation="row">row SB baseline</div>
+      <div class="format" orientation="row">row left center</div>
+      <div class="format" orientation="row">row left bottom</div>
+      <div class="format" orientation="row">row left baseline</div>
+      <div class="format" orientation="row">row right center</div>
+      <div class="format" orientation="row">row right bottom</div>
+      <div class="format" orientation="row">row right baseline</div>
+      <div class="format" orientation="row">row SB top</div>
+      <div class="format" orientation="row">row center top</div>
+      <div class="format" orientation="row">row left top</div>
+      <div class="format" orientation="row">row right top</div>
+    </div>
+    <div class="format-list" orientation="grid">
+      <div class="grid-format-line">
+        <div class="grid-format-line-name">grid</div>
+        <div class="grid-format-line-value" fn="grid">4</div>
+      </div>
+      <div class="grid-format-line">
+        <div class="grid-format-line-name">horizontal</div>
+        <div class="grid-format-line-value" fn="sp1">10</div>
+      </div>
+      <div class="grid-format-line">
+        <div class="grid-format-line-name">vertical</div>
+        <div class="grid-format-line-value" fn="sp2">10</div>
+      </div>
+    </div>
+  </panel>
+  
+  <panel id="self-align-panel" class="hide">
+    <div class="align-self-button" fn="">/</div>
+    <div class="align-self-button" fn="align-self-start">S</div>
+    <div class="align-self-button" fn="align-self-center">C</div>
+    <div class="align-self-button" fn="align-self-end">E</div>
+  </panel>
+  
+  <panel id="padding-panel">
+    <div class="padding-row">
+      <div fn="all" class="p_item">0</div>
+    </div>
+    <div class="companion-row">
+      <div class="compainion">V</div>
+      <div class="compainion">H</div>
+    </div>
+    <div class="padding-row">
+      <div fn="vertical"   class="p_item">0</div>
+      <div fn="horizontal" class="p_item">0</div>
+    </div>
+    <div class="companion-row">
+      <div class="compainion">T</div>
+      <div class="compainion">B</div>
+      <div class="compainion">L</div>
+      <div class="compainion">R</div>
+    </div>
+    <div class="padding-row">
+      <div fn="top"    class="p_item">0</div>
+      <div fn="bottom" class="p_item">0</div>
+      <div fn="left"   class="p_item">0</div>
+      <div fn="right"  class="p_item">0</div>
+    </div>
+  </panel>
+  
+  <panel id="sticker-panel" tag="sticker">
+    <div class="sticker-axis" fn="top"  axis="y">0</div>
+    <div class="sticker-axis" fn="left" axis="x">0</div>
+  </panel>
+  
+  <panel id="image-control-panel" tag="img">
+    <div id="image-mode-row">
+      <div class="image-mode" fn="aspect ratio">asp</div>
+      <div class="image-mode" fn="fit">fit</div>
+      <div class="image-mode" fn="mask">mask</div>
+    </div>
+    <div id="mask-control">
+      <div class="mask-row">
+        <div class="mask-controller" fn="width">0</div>        
+      </div>
+      <div class="mask-row">
+        <div class="mask-controller" fn="left">0</div>
+        <div class="mask-controller" fn="top">0</div>
+      </div>
+    </div>
+  </panel>
+  
+  <panel id="div-panel" class="hide suspended"></panel>
+  
+  <panel id="img-panel" tag="img">
+    <div id="folders"></div>
+    <div id="images"></div>
+  </panel>
+  
+  <panel id="save-panel">
+    <div id="save-name"></div>
+    <div id="save-tags">
+      <div class="save-tag">header-info</div>
+      <div class="save-tag">header-nav</div>
+      <div class="save-tag">header-pack</div>
+    </div>
+  </panel>
+  
+  <panel id="icon-panel" tag="icon">
+    <input id="icon-name" type="text" spellcheck="false">
+    <div id="icons"></div>
+    <div id="icon-packs">
+      <div class="icon-pack" pack="FA">FA</div>
+      <div class="icon-pack" pack="MD">MD</div>
+    </div>
+  </panel>
+  
+  <panel id="color-keys"></panel>
+  <panel id="color-panel" class="hide">
+    <div id="color-row">
+      <div default="true" color="rgb(0, 0, 0)" class="color-in-row"></div>
+      <div default="true" color="rgb(255, 255, 255)" class="color-in-row"></div>
+    </div>
+    <div class="color-panel-row">
+      <div class="color-option" fn="normal">n</div>
+      <div class="color-option" fn="background">BG</div>
+      <div class="color-option" fn="border">bd</div>
+    </div>
+    <div class="color-panel-row">
+      <div class="border-option" fn="width">0</div>
+      <div class="border-option" fn="radius">0</div>
+    </div>
+  </panel>
+  
+  <panel id="color-panel-2" class="hide">
+    <div class="color-panel-row">
+      <div class="border-option" fn="width">0</div>
+      <div class="border-option" fn="radius">0</div>
+    </div>
+    <div class="color-panel-row">
+      <div class="color-option" fn="normal">n</div>
+      <div class="color-option" fn="background">BG</div>
+      <div class="color-option" fn="border">bd</div>
+    </div>
+    <div id="color-row-2"></div>
+  </panel>
+  
+  <panel id="my-spectrum" class="hide"><input type="text" id="spectrum"></panel>
+  
+  <panel id="color-selector" class="hide">
+    <div class="color-sort-row">
+      <div class="color-sort-item selected" type="tag" fn="*">*</div>
+      <div class="color-sort-item" type="tag" fn="DIV">div</div>
+      <div class="color-sort-item" type="tag" fn="H3">h3</div>
+      <div class="color-sort-item" type="tag" fn="ICON">icon</div>
+      <div class="color-sort-item" type="tag" fn="LINE">line</div>
+    </div>
+    <div class="color-sort-row">
+      <div class="color-sort-item selected" type="type" fn="*">*</div>
+      <div class="color-sort-item" type="type" fn="color">c</div>
+      <div class="color-sort-item" type="type" fn="bgc">bg</div>
+      <div class="color-sort-item" type="type" fn="bdc">bd</div>
+    </div>
+    <div id="colors-to-select"></div>
+  </panel>
+    
+  <panel id="size-panel" tag="h3">
+    <div class="size-option" fn="width">0</div>
+    <div class="size-option" fn="height">0</div>
+  </panel>
+  
+  <panel id="toggle-panel" tag="div">
+    <div class="toggle-option" fn="bgi">B</div>
+    <!-- <div class="toggle-option" fn="height">H</div> -->
+    
+    <div class="sector-item" fn="flex">F</div>
+    <div class="full-moon-item" fn="width-100">W</div>
+    <div class="full-moon-item" fn="full-moon">M</div>
+    
+    <!-- <div class="sector-item" fn="activate">A</div>
+    <div class="sector-item" fn="deactivate">D</div> -->
+    <!-- <div class="toggle-option" fn="f1">F1</div> -->
+  </panel>
+  
+  <panel id="flex-panel" class="hide"></panel>
+  <panel id="sp-panel" class="hide"></panel>
+  
+  <panel id="auto-padding-panel" tag="div">
+    <div class="auto-padding-item" fn="top">T</div>
+    <div class="auto-padding-item" fn="top horizontal">3</div>
+    <div class="auto-padding-item" fn="top horizontal bottom">A</div>
+    <div class="auto-padding-item" fn="horizontal">H</div>
+  </panel>
+  
+  <panel id="flame-panel">
+    <div class="flame-item" fn="flamingo">Fla</div>
+  </panel>
+  
+  <panel id="line-control">
+    <div class="companion-row">
+      <div class="companion">W</div>
+      <div class="companion">H</div>
+      <div class="companion">W</div>
+    </div>
+    <div class="line-stats-row">
+      <div class="line-stat" val="0" merit="px" fn="width">0px</div>
+      <div class="line-stat" val="0" merit="px" fn="height">0px</div>
+      <div class="line-stat" val="0" merit="%"  fn="width">0%</div>
+    </div>
+  </panel>
+  
+  <panel id="img-masks" tag="img">
+    <div class="img-mask-item">circle</div>
+    <div class="img-mask-item">down-triangle</div>
+  </panel>
+  
+  <panel id="img-filters" tag="img">
+    <div class="img-filter-row">
+      <div class="img-filter-name">Blur</div>
+      <div class="img-filter-value" fn="blur" val="0" merit="px">0px</div>
+    </div>
+    <div class="img-filter-row">
+      <div class="img-filter-name">Grayscale</div>
+      <div class="img-filter-value" fn="grayscale" val="0" merit="%">0%</div>
+    </div>
+    <div class="img-filter-row">
+      <div class="img-filter-name">Brightness</div>
+      <div class="img-filter-value" fn="brightness" val="0" merit="%">0%</div>
+    </div>
+    <div class="img-filter-row">
+      <div class="img-filter-name">Contrast</div>
+      <div class="img-filter-value" fn="contrast" val="0" merit="%">0%</div>
+    </div>
+  </panel>
+  
+  <panel id="margin-control">
+    <div class="companion-row">
+      <div class="companion">T</div>
+      <div class="companion">B</div>
+      <div class="companion">L</div>
+      <div class="companion">R</div>
+    </div>
+    <div class="margin-stats-row">
+      <div class="margin-stat" fn="margin-top">0</div>
+      <div class="margin-stat" fn="margin-bottom">0</div>
+      <div class="margin-stat" fn="margin-left">0</div>
+      <div class="margin-stat" fn="margin-right">0</div>
+    </div>
+  </panel>
+  
+  <panel id="second-load-panel" class="hide">
+    <div id="second-tags"></div>
+    <div id="second-items"></div>
+  </panel>
+  
+  <panel id="text-format-panel" tag="H3">
+    <div class="text-format" fn="bold">B</div>
+    <div class="text-format" fn="italic">i</div>
+    <div class="text-format" fn="line">U</div>
+    <div class="text-format" fn="flex">F</div>
+    <div class="text-format font-size-format" fn="size">14</div>
+  </panel>
+  
+  <panel id="first-load-panel"></panel>
+  
+  <panel id="clip-path-panel" class="hide"></panel>
+  <panel id="clip-prop-panel" class="hide">
+    <div id="clip-name"></div>
+  </panel>
+  
+  <panel id="quickdraw" class="hide"></panel>
+  
+  <panel id="content-panel">
+    <div class="le-contents" tag="H3">
+      <div class="content-groups" tag="H3" opseo="0"></div>
+      <div class="content-items" tag="H3"></div>
+    </div>
+    <div class="le-contents" tag="IMG">
+      <div class="content-groups" tag="IMG" opseo="0"></div>
+      <div class="content-items" tag="IMG"></div>
+    </div>
+    <div class="le-contents" tag="ICON">
+      <div class="content-groups" tag="ICON" opseo="0"></div>
+      <div class="content-items" tag="ICON"></div>
+    </div>
+  </panel>
+  
+  <textarea id="content-input" class="hide"></textarea>
+  
+  
+  <panel id="prepare-panel" class="hide">
+    <div id="prepared-tags"></div>
+    <div id="prepared-ingredients"></div>
+    <div id="prepared-items"></div>
+  </panel>
+  
+  <panel id="le-browser">
+    <div id="le-preview">
+      <img src="" id="le-sign">
+    </div>
+    <div id="le-browser-selector">
+      <div id="le-filter">
+        <div id="le-up">
+          <div id="le-tag">
+            <div id="le-hold">CURRENT TAG</div>
+            <div id="le-curr-tag">?</div>
+          </div>
+        </div>
+        <div id="le-mid"></div>
+        <div id="le-down"></div>
+      </div>
+      <div id="le-shelf"></div>
+    </div>
+  </panel>
+  
+
+</body>
