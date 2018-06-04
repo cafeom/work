@@ -208,6 +208,16 @@ function update_changer_panel()
 				my_val = my_original + my_equation;
 
 				// at this point we need a color array and a font-family array to change to
+				// where the fuck can we find that array ?
+				// we create that array ourself @@
+
+				// about that color array
+				// we can take from the main color panel
+				// or the already color panel
+				// the already color panel is a bit tricky, because you need to exclude the unecessary colors
+
+				// the font-family panel is not as difficult
+				// you pick a bunch of fonts, then apply them to an array
 			}})
 
 		$('.changer_aft').click(function(e)
