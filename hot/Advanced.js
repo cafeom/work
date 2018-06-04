@@ -69,6 +69,75 @@ function color_keys_load()
 		}
 	}
 
+//////////////////////////////////////////////// Changer Panel Functions /////////////////////////////////////////////////
+
+// a function fires up after we select a div
+
+function update_changer_panel()
+	{
+		$('#changer').remove();
+
+		my_propeties = {}; my_propeties_root = 'color background-color border-color font-size font-family'.split(' ');
+
+		// we need to get all elements inside our div selections
+
+		my_sweets = [];
+
+		$(selection).each(function(index, value) {
+							
+			arr = all(selection[i].id);
+
+			for (var i = 0; i < arr.length; i++)
+			{
+				my_sweets.push(arr[i]);
+			}
+				
+		})
+
+		console.log(my_sweets);
+
+		// we need to search through all elements and get all the unique propeties
+
+		for (var i = 0; i < my_propeties_root.length; i++)
+		{
+			my_propeties[my_propeties_root[i]] = [];
+
+			$(my_sweets).each(function(index, value) {
+
+				my_current_propety = my_sweets[i].doc.css(my_propeties_root[i]);
+								
+				if ( inside(my_current_propety, my_propeties[my_propeties_root[i]]) == false )
+				{
+					my_propeties[my_propeties_root[i]].push(my_current_propety);
+				}
+
+			})
+		}
+
+		// we need to create changer_row elements
+
+		for (var i = 0; i < my_propeties_root.length; i++)
+		{
+			current_propeties = my_propeties[my_propeties_root[i]];
+
+			changer_row = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_row'}).appendTo('#changer');
+			changer_b4  = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_b4'}).appendTo(changer_row);
+			changer_aft = $('<DIV/>', {type: my_propeties_root[i], class: 'changer_aft'}).appendTo(changer_row);
+
+			for (var j = 0; j < current_propeties.length; j++)
+			{
+				if ( my_propeties_root[i].indexOf('color') >= 0 )
+				{
+					changer_b4.add(changer_aft).css('background-color', current_propeties[i]).addClass('changer_color');
+				}
+				else
+				{
+					changer_b4.add(changer_aft).text(current_propeties[i]).addClass('changer_text');;
+				}
+			}
+		}
+	}
+
 //////////////////////////////////////////////// Content Panel Functions /////////////////////////////////////////////////
 
 function process_the_content()

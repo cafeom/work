@@ -2051,6 +2051,34 @@ SP {
       #le-browser #le-browser-selector #le-down .sel_loot {
         background-color: rgba(255, 255, 255, 0.2); }
 
+#changer {
+  position: absolute;
+  top: 200px;
+  left: 1100px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-top-width: 5px;
+  width: 300px;
+  height: 500px;
+  overflow: scroll; }
+  #changer::-webkit-scrollbar {
+    width: 0px;
+    height: 3px; }
+  #changer::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 200, 255, 0.2); }
+  #changer .changer_row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
+    #changer .changer_row .changer_color {
+      width: 50px;
+      height: 50px; }
+
 .text {
   display: -webkit-box;
   display: -ms-flexbox;
