@@ -2090,6 +2090,16 @@ SP {
       margin-right: 5px;
       text-align: center; }
 
+#anakin {
+  position: absolute;
+  top: 570px;
+  left: 200px;
+  width: 200px;
+  height: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-top-width: 5px;
+  font-size: 12px; }
+
 .text {
   display: -webkit-box;
   display: -ms-flexbox;

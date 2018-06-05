@@ -217,6 +217,7 @@ panel_down = {
 
 		'R'       : [toggle_panel,'#le-browser'],
 		'T'       : [toggle_panel,'#content-panel'],
+		'X'       : [toggle_panel,'#anakin'],
 
 		'Enter'   : [toggle_black],
 		'Slash'   : [mytest],
