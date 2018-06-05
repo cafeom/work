@@ -189,7 +189,7 @@ function update_changer_panel()
 
 		// .changer_aft elements are draggale
 
-		$('.line-stat').draggable({
+		$('.changer_aft').draggable({
 			start : function(e, ui)
 			{
 				if ( $(this).attr('val') == 'default' ) { my_original = -1; } else { my_original = parseInt($(this).attr('val')); }
@@ -206,6 +206,11 @@ function update_changer_panel()
 				}
 
 				my_val = my_original + my_equation;
+
+				if ( my_fn.indexOf('color') >= 0 )
+				{
+					console.log(vader_colors);
+				}
 
 				// at this point we need a color array and a font-family array to change to
 				// where the fuck can we find that array ?
@@ -240,19 +245,19 @@ $('#vader').click(function(e)
 	{
 		if ( e.ctrlKey == true )
 		{
-			vader_update();
+			vader_update(); saved_vader_colors = JSON.parse(JSON.stringify(vader_colors));
 		}
 	}).contextmenu(function(e)
 	{
 		if ( e.ctrlKey == true )
 		{
-			vader_update();
+			vader_update(); saved_vader_colors = JSON.parse(JSON.stringify(vader_colors));
 		}
 
 		e.preventDefault();
 	}).dblclick(function(e)
 	{
-		$('#vader *').removeClass('hide');
+		$('#vader *').removeClass('hide'); vader_colors = JSON.parse(JSON.stringify(saved_vader_colors));
 	})
 function vader_update()
 	{
@@ -282,8 +287,12 @@ function vader_update()
 
 		$('.vader_row').contextmenu(function(e)
 		{
-			$(this).addClass('hide');
+			$(this).addClass('hide'); my_color = $(this).attr('color'); remove_element_from_array(vader_colors, my_color);
 		})
+	}
+function remove_element_from_array(arr, ele)
+	{
+		var index = arr.indexOf(ele); if (index > -1) { arr.splice(index, 1); }
 	}
 
 //////////////////////////////////////////////// Content Panel Functions /////////////////////////////////////////////////
