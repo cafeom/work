@@ -194,22 +194,30 @@ function update_changer_panel()
 			{
 				if ( $(this).attr('val') == 'default' ) { my_original = -1; } else { my_original = parseInt($(this).attr('val')); }
 
-				my_fn = $(this).attr('fn');
+				my_fn = $(this).attr('fn'); old_val = null;
 			},
 			drag : function(e, ui)
 			{
 				my_equation = ui.position.left - ui.originalPosition.left;
 
-				if ( e.ctrlKey == false && e.shiftKey == false )
+				if ( my_fn.indexOf('color') >= 0 )
 				{
-					my_equation /= 10;
+					if ( e.ctrlKey == false && e.shiftKey == false )
+					{
+						my_equation = Math.round(my_equation / 30);
+					}
 				}
 
 				my_val = my_original + my_equation;
 
-				if ( my_fn.indexOf('color') >= 0 )
+				if ( my_fn.indexOf('color') >= 0 ) { my_val = my_val % vader_colors.length; }
+
+				if ( my_fn.indexOf('color') >= 0 && my_val != old_val )
 				{
-					console.log(vader_colors);
+					if ( my_val == vader_colors.length ) { my_val = 0; }
+					if ( my_val < 0 ) { my_val = vader_colors.length-1; }
+
+					$(this).css('background-color', vader_colors[my_val]); $(this).attr('val', my_val); old_val = my_val;
 				}
 
 				// at this point we need a color array and a font-family array to change to
@@ -261,6 +269,8 @@ $('#vader').click(function(e)
 	})
 function vader_update()
 	{
+		$('#vader').empty();
+
 		vader_colors = ['rgb(255, 255, 255)','rgb(0, 0, 0)']; vader_keys = 'color background-color border-color'.split(' ');
 		masta_select = all(selection[0].id);
 
