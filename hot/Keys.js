@@ -177,6 +177,7 @@ global_down = {
 	'Ctrl+Enter' : [quickdraw],
 
 	'Ctrl+E'     : [swap_mode_LP_PP],
+	'Z'          : [swap_mode_changer],
 };
 global_up = {};
 
@@ -213,11 +214,14 @@ panel_down = {
 
 		'F'     : [add_prepare_ingredients],
 	},
+	'changer' : {
+
+	},
 	'LP' : {
 
 		'R'       : [toggle_panel,'#le-browser'],
 		'T'       : [toggle_panel,'#content-panel'],
-		'X'       : [toggle_panel,'#anakin'],
+		'X'       : [toggle_panel,'#vader'],
 
 		'Enter'   : [toggle_black],
 		'Slash'   : [mytest],

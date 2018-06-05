@@ -992,6 +992,19 @@ function swap_mode_LP_PP()
 			sasori_my_man = 'LP';
 		}
 	}
+function swap_mode_changer()
+	{
+		if ( $('#changer').hasClass('hide') )
+		{
+			$('#prepare-panel').addClass('hide'); $('#LP').removeClass('hide'); $('panel').removeClass('hide2');
+
+			sasori_my_man = 'changer'; $('#changer').removeClass('hide');
+		}
+		else
+		{
+			sasori_my_man = 'LP'; $('#changer').addClass('hide');
+		}
+	}
 
 //////////////////////////////////////////////// Color Selector Functions ////////////////////////////////////////////////
 
