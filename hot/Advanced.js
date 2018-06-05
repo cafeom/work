@@ -231,6 +231,61 @@ function update_changer_panel()
 		})
 	}
 
+///////////////////////////////////////////////// Vader Panel Functions //////////////////////////////////////////////////
+
+// how do we add colors from our selection ?
+// --> we just get all the colors, that's it
+
+$('#vader').click(function(e)
+	{
+		if ( e.ctrlKey == true )
+		{
+			vader_update();
+		}
+	}).contextmenu(function(e)
+	{
+		if ( e.ctrlKey == true )
+		{
+			vader_update();
+		}
+
+		e.preventDefault();
+	}).dblclick(function(e)
+	{
+		$('#vader *').removeClass('hide');
+	})
+function vader_update()
+	{
+		vader_colors = ['rgb(255, 255, 255)','rgb(0, 0, 0)']; vader_keys = 'color background-color border-color'.split(' ');
+		masta_select = all(selection[0].id);
+
+		$(masta_select).each(function(index, value) {
+							
+			for (var i = 0; i < vader_keys.length; i++)
+			{
+				my_css = value.doc.css(vader_keys[i]);
+
+				if ( my_css != 'rgba(0, 0, 0, 0)' && inside(my_css, vader_colors) == false )
+				{
+					vader_colors.push(my_css);
+				}
+			}
+
+		})
+
+		for (var i = 0; i < vader_colors.length; i++)
+		{
+			vader_row = $('<DIV/>', {class: 'vader_row'}).appendTo('#vader').attr('color', vader_colors[i]);
+			vader_col = $('<DIV/>', {class: 'vader_col'}).appendTo(vader_row).css('background-color', vader_colors[i]);
+			vader_txt = $('<DIV/>', {class: 'vader_txt'}).appendTo(vader_row).text(vader_colors[i]);
+		}
+
+		$('.vader_row').contextmenu(function(e)
+		{
+			$(this).addClass('hide');
+		})
+	}
+
 //////////////////////////////////////////////// Content Panel Functions /////////////////////////////////////////////////
 
 function process_the_content()
