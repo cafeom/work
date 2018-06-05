@@ -192,13 +192,13 @@ function update_changer_panel()
 		$('.changer_aft').draggable({
 			start : function(e, ui)
 			{
-				if ( $(this).attr('val') == 'default' ) { my_original = -1; } else { my_original = parseInt($(this).attr('val')); }
+				if ( $(this).attr('val') == 'default' ) { my_original = 0; } else { my_original = parseInt($(this).attr('val')); }
 
 				my_fn = $(this).attr('fn'); old_val = null;
 			},
 			drag : function(e, ui)
 			{
-				my_equation = ui.position.left - ui.originalPosition.left;
+				my_equation = ui.position.left - ui.originalPosition.left; if ( my_equation >= 0 ) { eq_side = true } else { eq_side = false; }
 
 				if ( my_fn.indexOf('color') >= 0 )
 				{
@@ -208,7 +208,11 @@ function update_changer_panel()
 					}
 				}
 
+				if ( my_fn.indexOf('color') >= 0 && eq_side == false ) { my_equation = -my_equation; }
+
 				my_val = my_original + my_equation;
+
+				if ( eq_side == false ) { my_val = Math.abs(vader_colors.length - my_val); }
 
 				if ( my_fn.indexOf('color') >= 0 ) { my_val = my_val % vader_colors.length; }
 
