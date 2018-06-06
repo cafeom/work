@@ -333,6 +333,8 @@ function changer_panel_change(le_indent)
 	{
 		my_item = $('.selected_changer_row'); my_aft = my_item.children().last(); my_fn = my_item.attr('fn');
 
+		if ( Math.abs(le_indent) != 1 && my_fn != 'font-size' ) { le_indent /= le_indent; }
+
 		if ( my_fn == 'font-size' )
 		{
 			my_val = parseInt(my_aft.text()); my_val += le_indent; my_aft.text(my_val + 'px'); $(my_aft).attr('val', my_val);

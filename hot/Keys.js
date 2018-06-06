@@ -220,6 +220,9 @@ panel_down = {
 
 		'Left'  : [changer_panel_change,-1],
 		'Right' : [changer_panel_change, 1],
+
+		'Ctrl+Left'  : [changer_panel_change,-10],
+		'Ctrl+Right' : [changer_panel_change, 10],
 	},
 	'LP' : {
 
