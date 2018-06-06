@@ -73,6 +73,8 @@ function color_keys_load()
 
 // a function fires up after we select a div
 
+my_free_fonts = ['Lato','sans-serif','Arial','Courier'];
+
 function update_changer_panel()
 	{
 		$('#changer').empty();
@@ -203,7 +205,14 @@ function update_changer_panel()
 				if ( my_equation >= 0 ) { eq_side = true } else { eq_side = false; }
 				if ( le_side == null && my_equation < 0 ) { le_side = true; }
 
-				if ( my_fn.indexOf('color') >= 0 )
+				if ( my_fn.indexOf('color') >= 0 ) // my_equation adjusting
+				{
+					if ( e.ctrlKey == false && e.shiftKey == false )
+					{
+						my_equation = Math.round(my_equation / 30);
+					}
+				}
+				else if ( my_fn.indexOf('font-family') >= 0 )
 				{
 					if ( e.ctrlKey == false && e.shiftKey == false )
 					{
@@ -211,22 +220,35 @@ function update_changer_panel()
 					}
 				}
 
-				if ( my_fn.indexOf('color') >= 0 && le_side != true && eq_side == false ) { my_equation = -my_equation; } // old canon here
+				if ( my_fn.indexOf('color')       >= 0 && le_side != true && eq_side == false ) { my_equation = -my_equation; }
+				if ( my_fn.indexOf('font-family') >= 0 && le_side != true && eq_side == false ) { my_equation = -my_equation; }
 
 				my_val = my_original + my_equation;
 
-				if ( le_side != true && eq_side == false ) { my_val = Math.abs(vader_colors.length - my_val); } // old canon here
-
+				if ( le_side != true && eq_side == false ) { my_val = Math.abs(vader_colors.length - my_val); }
 				if ( my_fn.indexOf('color') >= 0 ) { my_val = my_val % vader_colors.length; }
+				if ( my_fn.indexOf('font-family') >= 0 ) { my_val = my_val % my_free_fonts.length; }
+				if ( le_side == true && my_original == 0 && my_fn.indexOf('color') >= 0 ) { my_val = vader_colors.length - Math.abs(my_val); }
+				if ( le_side == true && my_original == 0 && my_fn.indexOf('font-family') >= 0 ) { my_val = my_free_fonts.length - Math.abs(my_val); }
 
-				if ( le_side == true && my_original == 0 ) { my_val = vader_colors.length - Math.abs(my_val); } // new canon here
-
-				if ( my_fn.indexOf('color') >= 0 && my_val != old_val )
+				if ( my_val != old_val )
 				{
-					if ( my_val == vader_colors.length ) { my_val = 0; }
-					if ( my_val < 0 ) { my_val = vader_colors.length-1; }
+					if ( my_fn.indexOf('color') >= 0 || my_fn.indexOf('font-family') >= 0  )
+					{
+						if ( my_val == vader_colors.length ) { my_val = 0; }
+						if ( my_val < 0 ) { my_val = vader_colors.length-1; }
+					}
 
-					$(this).css('background-color', vader_colors[my_val]); $(this).attr('val', my_val); old_val = my_val;
+					if ( my_fn.indexOf('color') >= 0 )
+					{
+						$(this).css('background-color', vader_colors[my_val]);
+					}
+					else if ( my_fn.indexOf('font-family') >= 0 )
+					{
+						$(this).text( my_free_fonts[my_val] );
+					}
+
+					$(this).attr('val', my_val); old_val = my_val;
 				}
 
 				// at this point we need a color array and a font-family array to change to

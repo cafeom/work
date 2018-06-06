@@ -6,7 +6,7 @@ baebae_list = 'BR, .smart_sector, .smart_flex, .smart_sp, .smart_padding, .smart
 white_list  = '.row, .col, .container, H3, ICON, LINE';
 elem_list   = '.col, .container, H3, ICON, LINE';
 
-elements    = []; selection = []; fresh = []; temp = []; cock_block = true; undo_mode = null; active_color_fn = null; g_count = 0;
+elements    = []; selection = []; fresh = []; temp = []; cock_block = true; undo_mode = null; active_color_fn = null; g_count = 0; vader_colors = [];
 font_links  = []; color_arrays = []; color_obj = {}; last_group_load_tag = null; space_craft = false; sasori_my_man = 'LP'; prepare_name = '?';
 
 //////////////////////////////////////////////////////////// LP Core //////////////////////////////////////////////////////////////

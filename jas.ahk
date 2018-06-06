@@ -56,6 +56,24 @@ Return
 
 Return
 
+!S::
+	WinGet, curtrans, Transparent, A
+	if (curtrans != 120)
+	{
+	    WinSet, Transparent, 120, A
+	    WinSet, AlwaysOnTop, on, A
+	    WinSet, ExStyle, +0x80020, A	
+	}
+	else
+	{
+		WinSet, Transparent, OFF, A
+		WinSet, Transparent, 255, A
+		Winset, AlwaysOnTop, off, A
+		WinSet, ExStyle, -0x80020, A
+	}
+
+Return
+
 F2::
 	IfWinActive, ahk_exe vlc.exe
 	{
