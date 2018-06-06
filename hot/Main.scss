@@ -1233,7 +1233,19 @@ SP { position: static !important; }
 
     .changer_color {
       width: 50px; height: 50px;
+      display: flex; align-items: center; justify-content: center;
     }
+
+    .changer_color::after {
+      content: ''; position: absolute;
+      width: 100%; height: 100%; font-size: 12px;
+      display: flex; align-items: center; justify-content: center;
+      text-shadow: 2px 2px rgba(0,0,0,0.5);
+    }
+
+    .changer_color[fn="color"]::after { content: 'color'; }
+    .changer_color[fn="background-color"]::after { content: 'BG'; }
+    .changer_color[fn="border-color"]::after { content: 'bgc'; }
 
     .changer_text {
       flex: 1; margin-right: 5px; text-align: center;

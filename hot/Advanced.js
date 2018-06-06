@@ -169,17 +169,27 @@ function update_changer_panel()
 
 			for (var j = 0; j < current_propeties.length; j++)
 			{
+				if ( inside(current_propeties[j], vader_colors) )
+				{
+					le_val = vader_colors.indexOf(current_propeties[j]);
+				}
+				else
+				{
+					le_val = 'default';
+				}
+
 				if ( current_propeties[j] != 'rgba(0, 0, 0, 0)' )
 				{
 					changer_row = $('<DIV/>', {cix: current_propeties[j], class: 'changer_row'}).appendTo('#changer');
 					changer_b4  = $('<DIV/>', {cix: current_propeties[j], class: 'changer_b4'}).appendTo(changer_row);
 					changer_aft = $('<DIV/>', {cix: current_propeties[j], class: 'changer_aft'}).appendTo(changer_row);
 
-					$(changer_row).add(changer_row.children()).attr({ val : 'default', fn : my_propeties_root[i] });
+					$(changer_row).add(changer_row.children()).attr({ val : le_val, fn : my_propeties_root[i] });
 
 					if ( my_propeties_root[i].indexOf('color') >= 0 )
 					{
 						changer_b4.add(changer_aft).css('background-color', current_propeties[j]).addClass('changer_color');
+						changer_aft.attr('color', current_propeties[j]);
 					}
 					else
 					{
@@ -376,6 +386,10 @@ function changer_panel_change(le_indent)
 		}
 	}
 
+// we gonna need something like
+// scroll to selected_changer_row
+// specify changer_type
+
 ///////////////////////////////////////////////// Vader Panel Functions //////////////////////////////////////////////////
 
 // how do we add colors from our selection ?
@@ -430,6 +444,17 @@ function vader_update()
 		$('.vader_row').contextmenu(function(e)
 		{
 			$(this).addClass('hide'); my_color = $(this).attr('color'); remove_element_from_array(vader_colors, my_color);
+		})
+
+		$('.changer_aft').each(function(index, value) {
+
+			my_color = $(this).attr('color');
+			
+			if ( inside(my_color, vader_colors) )
+			{
+				$(this).attr('val', vader_colors.indexOf(my_color));
+			}
+
 		})
 	}
 function remove_element_from_array(arr, ele)

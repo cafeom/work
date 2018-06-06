@@ -2084,7 +2084,38 @@ SP {
       position: static !important; }
     #changer .changer_row .changer_color {
       width: 50px;
-      height: 50px; }
+      height: 50px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center; }
+    #changer .changer_row .changer_color::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      font-size: 12px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      text-shadow: 2px 2px rgba(0, 0, 0, 0.5); }
+    #changer .changer_row .changer_color[fn="color"]::after {
+      content: 'color'; }
+    #changer .changer_row .changer_color[fn="background-color"]::after {
+      content: 'BG'; }
+    #changer .changer_row .changer_color[fn="border-color"]::after {
+      content: 'bgc'; }
     #changer .changer_row .changer_text {
       -webkit-box-flex: 1;
       -ms-flex: 1;
