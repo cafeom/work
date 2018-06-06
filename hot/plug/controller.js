@@ -52,7 +52,7 @@ if ( inside(myTitle, myNames) == false && indexOf_ex(myTitle, ex_array) == false
 
 //////////////////////////////////////////////// RE-BYE /////////////////////////////////////////////////
 
-ex_array = ['youtube','google','javfinder'];
+ex_array = ['youtube','google','jav tube'];
 
 function indexOf_ex(le_title, le_array)
 	{

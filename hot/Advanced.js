@@ -194,11 +194,14 @@ function update_changer_panel()
 			{
 				if ( $(this).attr('val') == 'default' ) { my_original = 0; } else { my_original = parseInt($(this).attr('val')); }
 
-				my_fn = $(this).attr('fn'); old_val = null;
+				my_fn = $(this).attr('fn'); old_val = null; le_side = null;
 			},
 			drag : function(e, ui)
 			{
-				my_equation = ui.position.left - ui.originalPosition.left; if ( my_equation >= 0 ) { eq_side = true } else { eq_side = false; }
+				my_equation = ui.position.left - ui.originalPosition.left;
+
+				if ( my_equation >= 0 ) { eq_side = true } else { eq_side = false; }
+				if ( le_side == null && my_equation < 0 ) { le_side = true; }
 
 				if ( my_fn.indexOf('color') >= 0 )
 				{
@@ -208,13 +211,15 @@ function update_changer_panel()
 					}
 				}
 
-				if ( my_fn.indexOf('color') >= 0 && eq_side == false ) { my_equation = -my_equation; }
+				if ( my_fn.indexOf('color') >= 0 && le_side != true && eq_side == false ) { my_equation = -my_equation; } // old canon here
 
 				my_val = my_original + my_equation;
 
-				if ( eq_side == false ) { my_val = Math.abs(vader_colors.length - my_val); }
+				if ( le_side != true && eq_side == false ) { my_val = Math.abs(vader_colors.length - my_val); } // old canon here
 
 				if ( my_fn.indexOf('color') >= 0 ) { my_val = my_val % vader_colors.length; }
+
+				if ( le_side == true && my_original == 0 ) { my_val = vader_colors.length - Math.abs(my_val); } // new canon here
 
 				if ( my_fn.indexOf('color') >= 0 && my_val != old_val )
 				{
