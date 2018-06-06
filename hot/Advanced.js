@@ -185,6 +185,13 @@ function update_changer_panel()
 					{
 						changer_b4.add(changer_aft).text(current_propeties[j]).addClass('changer_text');;
 					}
+
+					//
+
+					if ( my_propeties_root[i] == 'font-size' )
+					{
+						$(changer_row).add(changer_row.children()).attr({ val : current_propeties[j] });
+					}
 				}
 			}
 		}
@@ -219,6 +226,13 @@ function update_changer_panel()
 						my_equation = Math.round(my_equation / 30);
 					}
 				}
+				else if ( my_fn == 'font-size' )
+				{
+					if ( e.ctrlKey == false && e.shiftKey == false )
+					{
+						my_equation = Math.round(my_equation / 5);
+					}
+				}
 
 				if ( my_fn.indexOf('color')       >= 0 && le_side != true && eq_side == false ) { my_equation = -my_equation; }
 				if ( my_fn.indexOf('font-family') >= 0 && le_side != true && eq_side == false ) { my_equation = -my_equation; }
@@ -233,10 +247,15 @@ function update_changer_panel()
 
 				if ( my_val != old_val )
 				{
-					if ( my_fn.indexOf('color') >= 0 || my_fn.indexOf('font-family') >= 0  )
+					if ( my_fn.indexOf('color') >= 0 )
 					{
 						if ( my_val == vader_colors.length ) { my_val = 0; }
 						if ( my_val < 0 ) { my_val = vader_colors.length-1; }
+					}
+					else if ( my_fn.indexOf('font-family') >= 0 )
+					{
+						if ( my_val == my_free_fonts.length ) { my_val = 0; }
+						if ( my_val < 0 ) { my_val = my_free_fonts.length-1; }
 					}
 
 					if ( my_fn.indexOf('color') >= 0 )
@@ -246,6 +265,10 @@ function update_changer_panel()
 					else if ( my_fn.indexOf('font-family') >= 0 )
 					{
 						$(this).text( my_free_fonts[my_val] );
+					}
+					else if ( my_fn == 'font-size' )
+					{
+						$(this).text( my_val + 'px' );
 					}
 
 					$(this).attr('val', my_val); old_val = my_val;
