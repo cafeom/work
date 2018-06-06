@@ -1221,7 +1221,7 @@ SP { position: static !important; }
 
   .changer_row {
     display: flex; align-items: center; justify-content: center;
-    margin: 5px;
+    padding: 5px; min-height: 40px; align-items: center;
 
     .changer_b4 {
       margin-right: 100px;
@@ -1238,7 +1238,12 @@ SP { position: static !important; }
     .changer_text {
       flex: 1; margin-right: 5px; text-align: center;
     }
+  }
 
+  .selected_changer_row::after {
+    content: '●'; position: absolute;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
   }
 }
 

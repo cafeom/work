@@ -215,7 +215,11 @@ panel_down = {
 		'F'     : [add_prepare_ingredients],
 	},
 	'changer' : {
+		'Up'    : [changer_panel_switch,'Up'],
+		'Down'  : [changer_panel_switch,'Down'],
 
+		'Left'  : [changer_panel_change,'Left'],
+		'Right' : [changer_panel_change,'Right'],
 	},
 	'LP' : {
 

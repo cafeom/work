@@ -287,6 +287,8 @@ function update_changer_panel()
 				// you pick a bunch of fonts, then apply them to an array
 			}})
 
+		$('.changer_row').first().addClass('selected_changer_row');
+
 		$('.changer_aft').click(function(e)
 		{
 			my_arc = my_propeties_ids[$(this).attr('fn')][$(this).attr('cix')];
@@ -296,6 +298,47 @@ function update_changer_panel()
 				console.log( geet(my_arc[i]) );
 			}
 		})
+
+		$('.changer_aft').mousedown(function(e)
+		{
+			srm('selected_changer_row'); $(this).parent().addClass('selected_changer_row');
+		})
+	}
+function changer_panel_switch(side)
+	{
+		if ( side == 'Up' )
+		{
+			if ( $('.selected_changer_row').prev().length )
+			{
+				$('.selected_changer_row').removeClass('selected_changer_row').prev().addClass('selected_changer_row');
+			}
+			else
+			{
+				srm('selected_changer_row'); $('.changer_row').last().addClass('selected_changer_row');
+			}
+		}
+		else
+		{
+			if ( $('.selected_changer_row').next().length )
+			{
+				$('.selected_changer_row').removeClass('selected_changer_row').next().addClass('selected_changer_row');
+			}
+			else
+			{
+				srm('selected_changer_row'); $('.changer_row').first().addClass('selected_changer_row');
+			}
+		}
+	}
+function changer_panel_change(side)
+	{
+		if ( side == 'Left' )
+		{
+			
+		}
+		else
+		{
+			
+		}
 	}
 
 ///////////////////////////////////////////////// Vader Panel Functions //////////////////////////////////////////////////
