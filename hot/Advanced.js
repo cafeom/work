@@ -545,14 +545,17 @@ function process_the_content()
 					content_item = $('<DIV/>', {class: 'content_item'}).appendTo('.content-items[tag="H3"]');
 					content_item.attr('opseo', g_count).html(my_str.replace('------ ', '').replace(/\n/g, '<br>'));
 
-					if ( content_item.find('br').length && content_item.find('br').first().prev().length == 0 )
+					if ( content_item.find('br').length > 2 )
 					{
-						content_item.find('br').first().remove();
-					}
+						if ( content_item.find('br').length && content_item.find('br').first().prev().length == 0 )
+						{
+							content_item.find('br').first().remove();
+						}
 
-					if ( content_item.find('br').length && content_item.find('br').last().prev().length == 0 )
-					{
-						content_item.find('br').last().remove();
+						if ( content_item.find('br').length && content_item.find('br').last().prev().length == 0 )
+						{
+							content_item.find('br').last().remove();
+						}
 					}
 				}
 			}
