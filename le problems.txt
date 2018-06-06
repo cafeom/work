@@ -1,0 +1,9 @@
+most problems come from the first step --> get the goods
+
+to improve the process, we can make the following functions:
+	- view image when click or move a placeholder
+	- the phantom mask to get the hard text, image & icon
+		--> fill a mask on top, then project the text, image & icon on top of the mask, then select which you desire
+
+to improve the process, we can apply the following rules:
+	- ignore & save the absurd websites for later questioning
