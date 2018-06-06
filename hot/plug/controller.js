@@ -1,4 +1,4 @@
-if ( inside(myTitle, myNames) == false ) { $(document).ready(function(e) {
+if ( inside(myTitle, myNames) == false && indexOf_ex(myTitle, ex_array) == false ) { $(document).ready(function(e) {
 
 	font_links = $('<DIV/>', {class: 'hide', id: 'font_links'}).appendTo('body');
 	red_veltet = $('<DIV/>', {id: 'red_veltet'}).appendTo('body');
@@ -49,6 +49,25 @@ if ( inside(myTitle, myNames) == false ) { $(document).ready(function(e) {
 		}
 
 })}
+
+//////////////////////////////////////////////// RE-BYE /////////////////////////////////////////////////
+
+ex_array = ['youtube','google','javfinder'];
+
+function indexOf_ex(le_title, le_array)
+	{
+		le_title = le_title.toLowerCase(); le_wiay = false;
+
+		for (var i = 0; i < le_array.length; i++)
+		{
+			if ( le_title.indexOf( le_array[i].toLowerCase() ) >= 0 )
+			{
+				le_wiay = true; break;
+			}
+		}
+
+		return le_wiay;
+	}
 
 //////////////////////////////////////////////// RE-BYE /////////////////////////////////////////////////
 
