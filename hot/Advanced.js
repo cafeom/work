@@ -338,6 +338,30 @@ function changer_panel_switch(side)
 				srm('selected_changer_row'); $('.changer_row').first().addClass('selected_changer_row');
 			}
 		}
+
+		if ( $('.selected_changer_row').length )
+		{
+			my_top = $('.selected_changer_row').position().top; scrollTop = $('#changer').scrollTop();
+
+			if ( side == 'Up' )
+			{
+				if ( my_top > 450 )
+				{
+					$('#changer').scrollTop(my_top + scrollTop);
+				}
+				else if ( my_top + scrollTop < scrollTop )
+				{
+					$('#changer').scrollTop( scrollTop - 470 );
+				}
+			}
+			else
+			{
+				if ( (my_top > 450) || (my_top + scrollTop < scrollTop) )
+				{
+					$('#changer').scrollTop(my_top + scrollTop);
+				}
+			}
+		}
 	}
 function changer_panel_change(le_indent)
 	{
@@ -389,12 +413,15 @@ function changer_panel_change(le_indent)
 // we gonna need something like
 // scroll to selected_changer_row
 // specify changer_type
+// copy colors panel to panel
+
+// we still have a problem with the different whites
 
 ///////////////////////////////////////////////// Vader Panel Functions //////////////////////////////////////////////////
 
 // how do we add colors from our selection ?
 // --> we just get all the colors, that's it
-
+ 
 $('#vader').click(function(e)
 	{
 		if ( e.ctrlKey == true )

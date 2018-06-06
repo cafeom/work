@@ -2061,8 +2061,8 @@ SP {
   height: 500px;
   overflow: scroll; }
   #changer::-webkit-scrollbar {
-    width: 0px;
-    height: 3px; }
+    width: 3px;
+    height: 0px; }
   #changer::-webkit-scrollbar-thumb {
     background-color: rgba(255, 200, 255, 0.2); }
   #changer .changer_row {
@@ -2122,6 +2122,8 @@ SP {
       flex: 1;
       margin-right: 5px;
       text-align: center; }
+    #changer .changer_row .changer_text[fn="font-family"] {
+      font-size: 12px; }
   #changer .selected_changer_row::after {
     content: '●';
     position: absolute;
