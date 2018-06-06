@@ -3030,199 +3030,51 @@ function IMG_panel_init()
 
 		$('.thumbnail').click(function(e)
 		{
-			mysrc = $(this).attr('src'); e.preventDefault(); red_velvet = [];
-
-			if ( selection.length == 1 )
+			if ( e.ctrlKey == false )
 			{
-				Element = selection[0].doc.children('IMG'); Element.attr('src', mysrc);
+				mysrc = $(this).attr('src'); e.preventDefault(); red_velvet = [];
 
-				if ( selection[0].doc.parent().parent().parent().hasClass('grid') )
+				if ( selection.length == 1 )
 				{
-					git(selection[0].doc.parent().parent().parent());
-					if ( inside(item, red_velvet) == false ) { red_velvet.push(item); }
+					Element = selection[0].doc.children('IMG'); Element.attr('src', mysrc);
+
+					if ( selection[0].doc.parent().parent().parent().hasClass('grid') )
+					{
+						git(selection[0].doc.parent().parent().parent());
+						if ( inside(item, red_velvet) == false ) { red_velvet.push(item); }
+					}
+				}
+				else
+				{
+					$(selection).each(function(index, value) {
+
+						Element = value.doc.children('IMG');
+						random  = Math.floor((Math.random() * my_folder.length));
+						$(Element).attr('src', 'image/' + my_folder[random]);
+
+						if ( value.doc.parent().parent().parent().hasClass('grid') )
+						{
+							git(value.doc.parent().parent().parent());
+							if ( inside(item, red_velvet) == false ) { red_velvet.push(item); }
+						}
+							
+					})
+				}
+
+				for (var i = 0; i < red_velvet.length; i++)
+				{
+					grid_to_line( red_velvet[i].doc );
+					line_to_grid( red_velvet[i] );
 				}
 			}
 			else
 			{
-				$(selection).each(function(index, value) {
-
-					Element = value.doc.children('IMG');
-					random  = Math.floor((Math.random() * my_folder.length));
-					$(Element).attr('src', 'image/' + my_folder[random]);
-
-					if ( value.doc.parent().parent().parent().hasClass('grid') )
-					{
-						git(value.doc.parent().parent().parent());
-						if ( inside(item, red_velvet) == false ) { red_velvet.push(item); }
-					}
-						
-				})
+				$(this).IMG_Ignite();
 			}
 
-			for (var i = 0; i < red_velvet.length; i++)
-			{
-				grid_to_line( red_velvet[i].doc );
-				line_to_grid( red_velvet[i] );
-			}
 		}).contextmenu(function(e)
 		{
-			// content panel function
-
-			content_item = $('<IMG/>', {class: 'content_item'}).appendTo('.content-items[tag="IMG"]').attr({
-				src : $(this).attr('src')
-			}).css({
-				width : $(this).outerWidth(), height : $(this).outerHeight()
-			}).click(function(e)
-			{
-				if ( e.ctrlKey == false )
-				{
-					$(this).parent().children().removeClass('sight'); $(this).addClass('sight');
-				}
-				else
-				{
-					$(this).toggleClass('sight');
-				}
-			}).dblclick(function(e)
-			{
-				mysrc = $(this).attr('src');
-
-				$(selection).each(function(index, value) { value.doc.children('IMG').attr('src', mysrc); });
-			}).contextmenu(function(e)
-			{
-				if ( e.ctrlKey == false && e.shiftKey == true )
-				{
-					if ( confirm('delete this content item?') )
-					{
-						$(this).remove();
-					}
-				}
-				else if ( e.ctrlKey == true && e.shiftKey == false && $('.content-groups[tag="IMG"] .curr_group').length )
-				{
-					pr_opseo = $('.content-groups[tag="IMG"] .curr_group').attr('opseo');
-
-					if ( $('.content-items[tag="IMG"] .sight').length == 0 )
-					{
-						my_selector = $(this);
-					}
-					else
-					{
-						my_selector = $('.content-items[tag="IMG"] .sight');
-					}
-
-					$(my_selector).each(function(index, value) {
-						opseo = $(this).attr('opseo').split(',');
-						if ( inside(pr_opseo, opseo) )
-						{
-							index = opseo.indexOf(pr_opseo);
-							if (index > -1) {
-								opseo.splice(index, 1);
-							}
-						}
-
-						$(this).attr('opseo', opseo.toString());
-					})
-
-					$('.content-items[tag="IMG"] *').hide();
-					$('.content-items[tag="IMG"] *').each(function(index, value) {
-						if ( $(this).attr('opseo') )
-						{
-							opseo = $(this).attr('opseo').split(',');
-							if ( inside(pr_opseo, opseo) ) { $(this).show(); }
-						}
-					})
-				}
-				else if ( confirm('create a new group?') && $('.content-items[tag="IMG"] .sight').length && e.ctrlKey == false && e.shiftKey == false )
-				{
-					my_group_name = prompt('my group name is ?'); opseo = parseInt($(this).parent().prev().attr('opseo'));
-
-					content_group = $('<DIV/>', {class: 'content_group'}).appendTo('.content-groups[tag="IMG"]').text(my_group_name).attr({
-						opseo: opseo
-					}).click(function(e)
-					{
-						if ( e.ctrlKey == false && e.shiftKey == false )
-						{
-							$(this).parent().children().removeClass('curr_group'); $(this).addClass('curr_group');
-							$('.content-items[tag="IMG"] *').hide(); pr_opseo = $(this).attr('opseo');
-
-							$('.content-items[tag="IMG"] *').each(function(index, value) {
-								if ( $(this).attr('opseo') )
-								{
-									opseo = $(this).attr('opseo').split(',');
-									if ( inside(pr_opseo, opseo) ) { $(this).show(); }
-								}
-							})
-						}
-						else if ( e.ctrlKey == false && e.shiftKey == true )
-						{
-							$('.content-items[tag="IMG"] *').show();
-							$('.content-groups[tag="IMG"] .curr_group').removeClass('curr_group');
-						}
-						else if ( e.ctrlKey == true && e.shiftKey == false )
-						{
-							$('.content-items[tag="IMG"] *').hide();
-							$('.content-items[tag="IMG"] *').each(function(index, value)
-							{
-								if ( $(this).attr('opseo') == undefined || $(this).attr('opseo') == '' ) { $(this).show(); }
-							})
-
-							$('.content-groups[tag="IMG"] .curr_group').removeClass('curr_group');
-						}
-					}).dblclick(function(e)
-					{
-						collection = $('.content-items[tag="IMG"] .content_item:visible'); idx = 0;
-
-						$(selection).each(function(index, value) {
-											
-							if ( idx == collection.length ) { idx = 0; }
-
-							value.doc.children('IMG').attr('src', $(collection[idx]).attr('src')); idx++;
-								
-						})
-					}).contextmenu(function(e)
-					{
-						if ( confirm('add .sight to this group ?') )
-						{
-							pr_opseo = $(this).attr('opseo');
-
-							$('.content-items[tag="IMG"] .sight').each(function(index, value) {
-								if ( $(this).attr('opseo') == undefined || $(this).attr('opseo') == '' )
-								{
-									$(this).attr('opseo', pr_opseo);
-								}
-								else
-								{
-									opseo = $(this).attr('opseo').split(',');
-									if ( inside(pr_opseo, opseo) == false )
-									{
-										opseo.push(pr_opseo); $(this).attr('opseo', opseo.toString());
-									}
-								}
-							})
-
-							$(this).parent().children().removeClass('curr_group'); $(this).addClass('curr_group');
-							$('.content-items[tag="IMG"] *').hide();
-							
-							$('.content-items[tag="IMG"] *').each(function(index, value) {
-								if ( $(this).attr('opseo') )
-								{
-									opseo = $(this).attr('opseo').split(',');
-									if ( inside(pr_opseo, opseo) ) { $(this).show(); }
-								}
-							})
-
-							$('.content-items[tag="IMG"] .sight').removeClass('sight');
-						}
-
-						e.preventDefault();
-					})
-
-					$('.content-items[tag="IMG"] .sight').attr('opseo', opseo);
-
-					opseo = opseo + 1; $(this).parent().prev().attr('opseo', opseo); $('.content-items[tag="IMG"] .sight').removeClass('sight');
-				}
-
-				e.preventDefault();
-			});
+			$(this).IMG_Ignite();
 
 			if ( $('.content-groups[tag="IMG"] .curr_group').length )
 			{
@@ -3242,6 +3094,164 @@ function IMG_panel_init()
 		});
 
 	};
+$.fn.IMG_Ignite = function(e)
+	{
+		content_item = $('<IMG/>', {class: 'content_item'}).appendTo('.content-items[tag="IMG"]').attr({
+			src : $(this).attr('src')
+		}).css({
+			width : $(this).outerWidth(), height : $(this).outerHeight()
+		}).click(function(e)
+		{
+			if ( e.ctrlKey == false )
+			{
+				$(this).parent().children().removeClass('sight'); $(this).addClass('sight');
+			}
+			else
+			{
+				$(this).toggleClass('sight');
+			}
+		}).dblclick(function(e)
+		{
+			mysrc = $(this).attr('src');
+
+			$(selection).each(function(index, value) { value.doc.children('IMG').attr('src', mysrc); });
+		}).contextmenu(function(e)
+		{
+			if ( e.ctrlKey == false && e.shiftKey == true )
+			{
+				if ( confirm('delete this content item?') )
+				{
+					$(this).remove();
+				}
+			}
+			else if ( e.ctrlKey == true && e.shiftKey == false && $('.content-groups[tag="IMG"] .curr_group').length )
+			{
+				pr_opseo = $('.content-groups[tag="IMG"] .curr_group').attr('opseo');
+
+				if ( $('.content-items[tag="IMG"] .sight').length == 0 )
+				{
+					my_selector = $(this);
+				}
+				else
+				{
+					my_selector = $('.content-items[tag="IMG"] .sight');
+				}
+
+				$(my_selector).each(function(index, value) {
+					opseo = $(this).attr('opseo').split(',');
+					if ( inside(pr_opseo, opseo) )
+					{
+						index = opseo.indexOf(pr_opseo);
+						if (index > -1) {
+							opseo.splice(index, 1);
+						}
+					}
+
+					$(this).attr('opseo', opseo.toString());
+				})
+
+				$('.content-items[tag="IMG"] *').hide();
+				$('.content-items[tag="IMG"] *').each(function(index, value) {
+					if ( $(this).attr('opseo') )
+					{
+						opseo = $(this).attr('opseo').split(',');
+						if ( inside(pr_opseo, opseo) ) { $(this).show(); }
+					}
+				})
+			}
+			else if ( confirm('create a new group?') && $('.content-items[tag="IMG"] .sight').length && e.ctrlKey == false && e.shiftKey == false )
+			{
+				my_group_name = prompt('my group name is ?'); opseo = parseInt($(this).parent().prev().attr('opseo'));
+
+				content_group = $('<DIV/>', {class: 'content_group'}).appendTo('.content-groups[tag="IMG"]').text(my_group_name).attr({
+					opseo: opseo
+				}).click(function(e)
+				{
+					if ( e.ctrlKey == false && e.shiftKey == false )
+					{
+						$(this).parent().children().removeClass('curr_group'); $(this).addClass('curr_group');
+						$('.content-items[tag="IMG"] *').hide(); pr_opseo = $(this).attr('opseo');
+
+						$('.content-items[tag="IMG"] *').each(function(index, value) {
+							if ( $(this).attr('opseo') )
+							{
+								opseo = $(this).attr('opseo').split(',');
+								if ( inside(pr_opseo, opseo) ) { $(this).show(); }
+							}
+						})
+					}
+					else if ( e.ctrlKey == false && e.shiftKey == true )
+					{
+						$('.content-items[tag="IMG"] *').show();
+						$('.content-groups[tag="IMG"] .curr_group').removeClass('curr_group');
+					}
+					else if ( e.ctrlKey == true && e.shiftKey == false )
+					{
+						$('.content-items[tag="IMG"] *').hide();
+						$('.content-items[tag="IMG"] *').each(function(index, value)
+						{
+							if ( $(this).attr('opseo') == undefined || $(this).attr('opseo') == '' ) { $(this).show(); }
+						})
+
+						$('.content-groups[tag="IMG"] .curr_group').removeClass('curr_group');
+					}
+				}).dblclick(function(e)
+				{
+					collection = $('.content-items[tag="IMG"] .content_item:visible'); idx = 0;
+
+					$(selection).each(function(index, value) {
+
+						if ( idx == collection.length ) { idx = 0; }
+
+						value.doc.children('IMG').attr('src', $(collection[idx]).attr('src')); idx++;
+
+					})
+				}).contextmenu(function(e)
+				{
+					if ( confirm('add .sight to this group ?') )
+					{
+						pr_opseo = $(this).attr('opseo');
+
+						$('.content-items[tag="IMG"] .sight').each(function(index, value) {
+							if ( $(this).attr('opseo') == undefined || $(this).attr('opseo') == '' )
+							{
+								$(this).attr('opseo', pr_opseo);
+							}
+							else
+							{
+								opseo = $(this).attr('opseo').split(',');
+								if ( inside(pr_opseo, opseo) == false )
+								{
+									opseo.push(pr_opseo); $(this).attr('opseo', opseo.toString());
+								}
+							}
+						})
+
+						$(this).parent().children().removeClass('curr_group'); $(this).addClass('curr_group');
+						$('.content-items[tag="IMG"] *').hide();
+
+						$('.content-items[tag="IMG"] *').each(function(index, value) {
+							if ( $(this).attr('opseo') )
+							{
+								opseo = $(this).attr('opseo').split(',');
+								if ( inside(pr_opseo, opseo) ) { $(this).show(); }
+							}
+						})
+
+						$('.content-items[tag="IMG"] .sight').removeClass('sight');
+					}
+
+					e.preventDefault();
+				})
+
+				$('.content-items[tag="IMG"] .sight').attr('opseo', opseo);
+
+				opseo = opseo + 1; $(this).parent().prev().attr('opseo', opseo); $('.content-items[tag="IMG"] .sight').removeClass('sight');
+			}
+
+			e.preventDefault();
+		});
+	}
 
 //////////////////////////////////////////////////// Icon Functions /////////////////////////////////////////////////////
 
@@ -3299,30 +3309,48 @@ function update_icon_panel()
 
 $('.icon').click(function(e)
 	{
-		my_icon = $(this).attr('icon');
+		if ( e.ctrlKey == false )
+		{
+			my_icon = $(this).attr('icon');
 
-		$(selection).each(function(index, value) {
-							
-			if ( value.tag == 'ICON' )
-			{
-				for (var key in icons_classes) { value.doc.removeClass(icons_classes[key]); }
-
-				value.doc.removeClass(value.content).addClass(icons_classes[current_pack_name]).text('');
-
-				switch(current_pack_name)
+			$(selection).each(function(index, value) {
+								
+				if ( value.tag == 'ICON' )
 				{
-					case 'FA': value.doc.addClass(my_icon) ; break;
-					case 'MD': value.doc.text(my_icon)     ; break;
-				}
+					for (var key in icons_classes) { value.doc.removeClass(icons_classes[key]); }
 
-				value.content = my_icon; value.text.text(my_icon);
-			}
-				
-		})
+					value.doc.removeClass(value.content).addClass(icons_classes[current_pack_name]).text('');
+
+					switch(current_pack_name)
+					{
+						case 'FA': value.doc.addClass(my_icon) ; break;
+						case 'MD': value.doc.text(my_icon)     ; break;
+					}
+
+					value.content = my_icon; value.text.text(my_icon);
+				}
+					
+			})
+		}
+		else
+		{
+			$(this).ICON_Ignite();
+		}
 	}).contextmenu(function(e)
 	{
 		// content panel function
 
+		$(this).ICON_Ignite();
+
+		if ( $('.content-groups[tag="ICON"] .curr_group').length )
+		{
+			$(bingo).attr('opseo', $('.content-groups[tag="ICON"] .curr_group').attr('opseo'));
+		}
+
+		e.preventDefault();
+	})
+$.fn.ICON_Ignite = function(e)
+	{
 		bingo = $(this).clone().appendTo('.content-items[tag="ICON"]').removeClass('icon').click(function(e)
 		{
 			if ( e.ctrlKey == false )
@@ -3338,9 +3366,9 @@ $('.icon').click(function(e)
 			my_class = $(this).attr('class');
 
 			$(selection).each(function(index, value) {
-								
+
 				value.doc.removeAttr('class'); value.doc.attr('class', my_class);
-					
+
 			})
 		}).contextmenu(function(e)
 		{
@@ -3478,14 +3506,7 @@ $('.icon').click(function(e)
 
 			e.preventDefault();
 		});
-
-		if ( $('.content-groups[tag="ICON"] .curr_group').length )
-		{
-			$(bingo).attr('opseo', $('.content-groups[tag="ICON"] .curr_group').attr('opseo'));
-		}
-
-		e.preventDefault();
-	})
+	}
 
 ///////////////////////////////////////////// DIV Resizable Height Functions ////////////////////////////////////////////
 
