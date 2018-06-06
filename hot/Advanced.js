@@ -42,6 +42,10 @@ $('panel').draggable({ cancel : 'DIV, INPUT' }).dblclick(function(e)
 
 				$('#color-row-2').sortable();
 			}
+			else if ( e.ctrlKey == true && e.shiftKey == false && e.altKey == true )
+			{
+				vader_to_color_row_2();
+			}
 
 			e.preventDefault();
 		}
@@ -410,12 +414,32 @@ function changer_panel_change(le_indent)
 		}
 	}
 
-// we gonna need something like
-// scroll to selected_changer_row
-// specify changer_type
-// copy colors panel to panel
+function color_row_2_to_vader()
+	{
+		$('.color-in-row:visible').each(function(index, value) {
+			my_color = $(this).attr('color');
 
-// we still have a problem with the different whites
+			vader_colors.push( my_color )
+
+			vader_row = $('<DIV/>', {class: 'vader_row added'}).appendTo('#vader').attr('color', my_color);
+			vader_col = $('<DIV/>', {class: 'vader_col'}).appendTo(vader_row).css('background-color', my_color);
+			vader_txt = $('<DIV/>', {class: 'vader_txt'}).appendTo(vader_row).text(my_color);
+		})
+
+		vader_color_functions();
+	}
+function vader_to_color_row_2()
+	{
+		$('.vader_row').each(function(index, value) {
+			
+			my_color = $(this).attr('color');
+
+			color_in_row = $('<DIV/>', {class: 'color-in-row'}).appendTo('#color-row-2').attr({ color : my_color, og : my_color }).color_in_row();
+			color_shape  = $('<DIV/>', {class: 'color_shape'}).appendTo(color_in_row).css('background-color', my_color);
+			color_text   = $('<DIV/>', {class: 'color_text'}).appendTo(color_in_row).text(my_color);
+
+		})
+	}
 
 ///////////////////////////////////////////////// Vader Panel Functions //////////////////////////////////////////////////
 
@@ -430,15 +454,20 @@ $('#vader').click(function(e)
 		}
 	}).contextmenu(function(e)
 	{
-		if ( e.ctrlKey == true )
+		if ( e.ctrlKey == true && e.shiftKey == false && e.altKey == false )
 		{
 			vader_update(); saved_vader_colors = JSON.parse(JSON.stringify(vader_colors));
+		}
+		else if ( e.ctrlKey == true && e.shiftKey == false && e.altKey == true )
+		{
+			color_row_2_to_vader();
 		}
 
 		e.preventDefault();
 	}).dblclick(function(e)
 	{
-		$('#vader *').removeClass('hide'); vader_colors = JSON.parse(JSON.stringify(saved_vader_colors));
+		$('#vader *').removeClass('hide'); $('.vader_row.added').remove();
+		vader_colors = JSON.parse(JSON.stringify(saved_vader_colors));
 	})
 function vader_update()
 	{
@@ -468,6 +497,10 @@ function vader_update()
 			vader_txt = $('<DIV/>', {class: 'vader_txt'}).appendTo(vader_row).text(vader_colors[i]);
 		}
 
+		vader_color_functions();
+	}
+function vader_color_functions()
+	{
 		$('.vader_row').contextmenu(function(e)
 		{
 			$(this).addClass('hide'); my_color = $(this).attr('color'); remove_element_from_array(vader_colors, my_color);
