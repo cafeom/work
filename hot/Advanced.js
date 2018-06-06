@@ -329,15 +329,33 @@ function changer_panel_switch(side)
 			}
 		}
 	}
-function changer_panel_change(side)
+function changer_panel_change(le_indent)
 	{
-		if ( side == 'Left' )
+		my_item = $('.selected_changer_row'); my_aft = my_item.children().last(); my_fn = my_item.attr('fn');
+
+		if ( my_fn == 'font-size' )
 		{
-			
+			my_val = parseInt(my_aft.text()); my_val += le_indent; my_aft.text(my_val + 'px'); $(my_aft).attr('val', my_val);
 		}
-		else
+		else if ( my_fn == 'font-family' )
 		{
-			
+			my_val = my_aft.attr('val'); if ( my_val == 'default' ) { my_val = 0 } else { my_val = parseInt(my_val); }
+			my_val += le_indent;
+
+			if ( my_val >= my_free_fonts.length ) { my_val = 0; }
+			if ( my_val < 0 ) { my_val = my_free_fonts.length-1; }
+
+			my_aft.text(my_free_fonts[my_val]); $(my_aft).attr('val', my_val);
+		}
+		else if ( my_fn.indexOf('color') >= 0 )
+		{
+			my_val = my_aft.attr('val'); if ( my_val == 'default' ) { my_val = 0 } else { my_val = parseInt(my_val); }
+			my_val += le_indent;
+
+			if ( my_val >= vader_colors.length ) { my_val = 0; }
+			if ( my_val < 0 ) { my_val = vader_colors.length-1; }
+
+			my_aft.css('background-color', vader_colors[my_val]); $(my_aft).attr('val', my_val);
 		}
 	}
 
