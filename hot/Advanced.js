@@ -73,7 +73,7 @@ function color_keys_load()
 
 // a function fires up after we select a div
 
-my_free_fonts = ['Lato','sans-serif','Arial','Courier'];
+my_free_fonts = ['Lato','Georgia','Arial','Courier'];
 
 function update_changer_panel()
 	{
@@ -338,6 +338,8 @@ function changer_panel_change(le_indent)
 		if ( my_fn == 'font-size' )
 		{
 			my_val = parseInt(my_aft.text()); my_val += le_indent; my_aft.text(my_val + 'px'); $(my_aft).attr('val', my_val);
+
+			arc_val = my_val + 'px';
 		}
 		else if ( my_fn == 'font-family' )
 		{
@@ -348,6 +350,8 @@ function changer_panel_change(le_indent)
 			if ( my_val < 0 ) { my_val = my_free_fonts.length-1; }
 
 			my_aft.text(my_free_fonts[my_val]); $(my_aft).attr('val', my_val);
+
+			arc_val = my_free_fonts[my_val];
 		}
 		else if ( my_fn.indexOf('color') >= 0 )
 		{
@@ -358,6 +362,17 @@ function changer_panel_change(le_indent)
 			if ( my_val < 0 ) { my_val = vader_colors.length-1; }
 
 			my_aft.css('background-color', vader_colors[my_val]); $(my_aft).attr('val', my_val);
+
+			arc_val = my_val + vader_colors[my_val];
+		}
+
+		//
+
+		my_arc = my_propeties_ids[my_fn][$(my_aft).attr('cix')];
+
+		for (var i = 0; i < my_arc.length; i++)
+		{
+			my_love = geet(my_arc[i]); my_love.doc.css(my_fn, arc_val);
 		}
 	}
 
