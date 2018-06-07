@@ -1,3 +1,5 @@
+ex_array = ['youtube','google','jav tube','nhaccuatui'];
+
 if ( inside(myTitle, myNames) == false && indexOf_ex(myTitle, ex_array) == false ) { $(document).ready(function(e) {
 
 	font_links = $('<DIV/>', {class: 'hide', id: 'font_links'}).appendTo('body');
@@ -32,6 +34,8 @@ if ( inside(myTitle, myNames) == false && indexOf_ex(myTitle, ex_array) == false
 				else if ( key == '*'      ) { collect_fonts(); }
 				else if ( key == '-'      ) { $('.ambition, .master_wu').remove(); }
 				else if ( key == 'insert' ) { already_list = []; }
+
+				else if ( key == 'tab'    ) { chase(); }
 			}
 			if ( (e.ctrlKey == true) && (e.shiftKey == false) && (e.altKey == false) )
 			{
@@ -50,9 +54,14 @@ if ( inside(myTitle, myNames) == false && indexOf_ex(myTitle, ex_array) == false
 
 })}
 
-//////////////////////////////////////////////// RE-BYE /////////////////////////////////////////////////
+/////////////////////////////////////////////// chase me ////////////////////////////////////////////////
 
-ex_array = ['youtube','google','jav tube','nhaccuatui'];
+function chase()
+	{
+		$('*').unbind(); console.log('unbind');
+	}
+
+//////////////////////////////////////////////// RE-BYE /////////////////////////////////////////////////
 
 function indexOf_ex(le_title, le_array)
 	{
